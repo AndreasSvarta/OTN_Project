@@ -12,7 +12,7 @@ Package frm_test_util is
       row          :  integer range 4 downto 0;
       col          :  integer range 128 downto 0;
       data         :  std_logic_vector(255 downto 0);
-      fas_pos      :  integer range 511 downto 0:=511;
+      fas_pos      :  integer range 511 downto 0;--:=511;
  
       FAS          :  std_logic_vector(47 downto 0);-- := x"f6f6f6282828";
       MFAS         :  std_logic_vector(7 downto 0);--dldasd

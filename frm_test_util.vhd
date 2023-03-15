@@ -15,7 +15,7 @@ Package frm_test_util is
       fas_pos      :  integer range 511 downto 0;--:=511;
  
       FAS          :  std_logic_vector(47 downto 0);-- := x"f6f6f6282828";
-      MFAS         :  std_logic_vector(7 downto 0);--dldasd
+      MFAS         :  std_logic_vector(7 downto 0);
       SM_TTI       :  std_logic_vector(511 downto 0);
       SM_BIP8      :  std_logic_vector(7 downto 0);
       SM_AUX       :  std_logic_vector(7 downto 0);

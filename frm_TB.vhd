@@ -100,7 +100,7 @@ frm_gen1 : frm_gen port map(clk_TB,reset_TB,out_data_TB,stat_TB,test_conf_TB,otn
       otn_oh_TB.row          <=  0;
       otn_oh_TB.col          <=  0;
       otn_oh_TB.data         <=  (others => '0');
-      otn_oh_TB.fas_pos      <=  511-256+8;
+      otn_oh_TB.fas_pos      <=  511;
  
       otn_oh_TB.FAS          <=  x"f6f6f6282828";
       otn_oh_TB.MFAS         <=  (others => '0');

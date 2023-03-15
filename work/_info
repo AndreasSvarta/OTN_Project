@@ -1,0 +1,362 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/Users/Andreas/OneDrive/uni/6. semester/FPGA/ex2
+Efrm_align
+Z0 w1678881704
+Z1 DPx4 ieee 18 std_logic_unsigned 0 22 ;eZjO2D4ZDz<]0>8AL<ne1
+Z2 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
+Z3 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z4 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+Z5 dC:/Users/Andreas/OneDrive/uni/6. semester/FPGA/projekt
+Z6 8C:/Users/Andreas/OneDrive/uni/6. semester/FPGA/projekt/frm_align.vhd
+Z7 FC:/Users/Andreas/OneDrive/uni/6. semester/FPGA/projekt/frm_align.vhd
+l0
+L8
+VVM`V_k=3_ANQ@LoG`;?0X3
+!s100 d@O2<=_:aEK_N;Bn:E]M?1
+Z8 OV;C;10.4b;61
+32
+Z9 !s110 1678888101
+!i10b 1
+Z10 !s108 1678888101.000000
+Z11 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Andreas/OneDrive/uni/6. semester/FPGA/projekt/frm_align.vhd|
+Z12 !s107 C:/Users/Andreas/OneDrive/uni/6. semester/FPGA/projekt/frm_align.vhd|
+!i113 1
+Z13 o-work work -2002 -explicit
+Z14 tExplicit 1
+Afrm_align_arch
+R1
+R2
+R3
+R4
+DEx4 work 9 frm_align 0 22 VM`V_k=3_ANQ@LoG`;?0X3
+l25
+L22
+V@LFd6V70VFeo7:EA4IS8I1
+!s100 Kbc6WkR2L=^a_aDR0Z@GS2
+R8
+32
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 1
+R13
+R14
+Efrm_ana
+Z15 w1678282769
+Z16 DPx4 work 13 frm_test_util 0 22 ][;@kYe^;44Dz<[WCDebK0
+R1
+R2
+R3
+R4
+R5
+Z17 8C:/Users/Andreas/OneDrive/uni/6. semester/FPGA/projekt/frm_ana.vhd
+Z18 FC:/Users/Andreas/OneDrive/uni/6. semester/FPGA/projekt/frm_ana.vhd
+l0
+L8
+V5VLCg11klc0ScE[fbD7h83
+!s100 X9X;hWLYT61VKnmB5D<lk0
+R8
+32
+Z19 !s110 1678888102
+!i10b 1
+R10
+Z20 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Andreas/OneDrive/uni/6. semester/FPGA/projekt/frm_ana.vhd|
+Z21 !s107 C:/Users/Andreas/OneDrive/uni/6. semester/FPGA/projekt/frm_ana.vhd|
+!i113 1
+R13
+R14
+Afrm_ana_0
+R16
+R1
+R2
+R3
+R4
+DEx4 work 7 frm_ana 0 22 5VLCg11klc0ScE[fbD7h83
+l33
+L21
+Ve_kGVZ<50nkh02lTaBDAc0
+!s100 O`gWBmaRSNUHW[LZfZ4MZ3
+R8
+32
+R19
+!i10b 1
+R10
+R20
+R21
+!i113 1
+R13
+R14
+Efrm_bip_8
+Z22 w1678287826
+R1
+R2
+R3
+R4
+R5
+Z23 8C:/Users/Andreas/OneDrive/uni/6. semester/FPGA/projekt/frm_bip-8.vhd
+Z24 FC:/Users/Andreas/OneDrive/uni/6. semester/FPGA/projekt/frm_bip-8.vhd
+l0
+L7
+V@b`01Tf_UZLJZfL2Nlmg91
+!s100 aXgf0Ml;UC6f`;jMHkd6M0
+R8
+32
+R19
+!i10b 1
+Z25 !s108 1678888102.000000
+Z26 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Andreas/OneDrive/uni/6. semester/FPGA/projekt/frm_bip-8.vhd|
+Z27 !s107 C:/Users/Andreas/OneDrive/uni/6. semester/FPGA/projekt/frm_bip-8.vhd|
+!i113 1
+R13
+R14
+Afrm_bip_8_arch
+R1
+R2
+R3
+R4
+DEx4 work 9 frm_bip_8 0 22 @b`01Tf_UZLJZfL2Nlmg91
+l25
+L22
+V^V32TA5;_bT7[J7V:am8E1
+!s100 JV<4XR56JZBZ2Sm^U]KPi3
+R8
+32
+R19
+!i10b 1
+R25
+R26
+R27
+!i113 1
+R13
+R14
+Efrm_demap
+Z28 w1678288322
+R1
+R2
+R3
+R4
+R5
+Z29 8C:/Users/Andreas/OneDrive/uni/6. semester/FPGA/projekt/frm_demap.vhd
+Z30 FC:/Users/Andreas/OneDrive/uni/6. semester/FPGA/projekt/frm_demap.vhd
+l0
+L8
+VWOdM<2DE[AiOiLO=:eiBz3
+!s100 W^C;abGOob^`kZLI3<@3:2
+R8
+32
+R19
+!i10b 1
+R25
+Z31 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Andreas/OneDrive/uni/6. semester/FPGA/projekt/frm_demap.vhd|
+Z32 !s107 C:/Users/Andreas/OneDrive/uni/6. semester/FPGA/projekt/frm_demap.vhd|
+!i113 1
+R13
+R14
+Afrm_demap_arch
+R1
+R2
+R3
+R4
+DEx4 work 9 frm_demap 0 22 WOdM<2DE[AiOiLO=:eiBz3
+l22
+L19
+V>ifd1d>o2X@X>HW5VF>_?1
+!s100 eB>>FEL2V0:dfT[H?=OPf1
+R8
+32
+R19
+!i10b 1
+R25
+R31
+R32
+!i113 1
+R13
+R14
+Efrm_framer
+Z33 w1678887992
+R16
+R1
+R2
+R3
+R4
+R5
+Z34 8C:/Users/Andreas/OneDrive/uni/6. semester/FPGA/projekt/frm_TB.vhd
+Z35 FC:/Users/Andreas/OneDrive/uni/6. semester/FPGA/projekt/frm_TB.vhd
+l0
+L8
+V>J7F3>KWKJR6N:28@g33U2
+!s100 ^dAW=AS^^2_7c1;[CZYRm1
+R8
+32
+R19
+!i10b 1
+R25
+Z36 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Andreas/OneDrive/uni/6. semester/FPGA/projekt/frm_TB.vhd|
+Z37 !s107 C:/Users/Andreas/OneDrive/uni/6. semester/FPGA/projekt/frm_TB.vhd|
+!i113 1
+R13
+R14
+Afrm_framer_arch
+R16
+R1
+R2
+R3
+R4
+Z38 DEx4 work 10 frm_framer 0 22 >J7F3>KWKJR6N:28@g33U2
+l85
+L13
+Z39 VhGh[2zdJf?i:U>l?FF2YE1
+Z40 !s100 Dm6`o]]]e@Bgk3];J[e`P0
+R8
+32
+R19
+!i10b 1
+R25
+R36
+R37
+!i113 1
+R13
+R14
+Efrm_gen
+R15
+R16
+R1
+R2
+R3
+R4
+R5
+Z41 8C:\Users\Andreas\OneDrive\uni\6. semester\FPGA\projekt\frm_gen.vhd
+Z42 FC:\Users\Andreas\OneDrive\uni\6. semester\FPGA\projekt\frm_gen.vhd
+l0
+L8
+VClWo=8O046c_2Vh=`dz6I2
+!s100 3oY:;2RG4C[aC9K[4;HUP1
+R8
+32
+R19
+!i10b 1
+R25
+Z43 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:\Users\Andreas\OneDrive\uni\6. semester\FPGA\projekt\frm_gen.vhd|
+Z44 !s107 C:\Users\Andreas\OneDrive\uni\6. semester\FPGA\projekt\frm_gen.vhd|
+!i113 1
+R13
+R14
+Afrm_gen_0
+R16
+R1
+R2
+R3
+R4
+DEx4 work 7 frm_gen 0 22 ClWo=8O046c_2Vh=`dz6I2
+l27
+L22
+VjJzTO5QXZY3z2To^N1E413
+!s100 ^dRn?b4bX<5[LQU9bNL>43
+R8
+32
+R19
+!i10b 1
+R25
+R43
+R44
+!i113 1
+R13
+R14
+Efrm_scramble
+Z45 w1678287831
+R1
+R2
+R3
+R4
+R5
+Z46 8C:\Users\Andreas\OneDrive\uni\6. semester\FPGA\projekt\frm_scramble.vhd
+Z47 FC:\Users\Andreas\OneDrive\uni\6. semester\FPGA\projekt\frm_scramble.vhd
+l0
+L7
+V?XHnb>Z8foB=4^B@[VbEh1
+!s100 ?_gCf[UcZBQHfCAHV`JES2
+R8
+32
+R19
+!i10b 1
+R25
+Z48 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:\Users\Andreas\OneDrive\uni\6. semester\FPGA\projekt\frm_scramble.vhd|
+Z49 !s107 C:\Users\Andreas\OneDrive\uni\6. semester\FPGA\projekt\frm_scramble.vhd|
+!i113 1
+R13
+R14
+Afrm_scramble_arch
+R1
+R2
+R3
+R4
+DEx4 work 12 frm_scramble 0 22 ?XHnb>Z8foB=4^B@[VbEh1
+l24
+L21
+Vn3[hO^^7?eec_XzmLRagV1
+!s100 >gD=ZI@]bm]`B=3OKZOcb2
+R8
+32
+R19
+!i10b 1
+R25
+R48
+R49
+!i113 1
+R13
+R14
+Pfrm_test_util
+R1
+R2
+R3
+R4
+Z50 w1678886928
+R5
+Z51 8C:/Users/Andreas/OneDrive/uni/6. semester/FPGA/projekt/frm_test_util.vhd
+Z52 FC:/Users/Andreas/OneDrive/uni/6. semester/FPGA/projekt/frm_test_util.vhd
+l0
+L7
+V][;@kYe^;44Dz<[WCDebK0
+!s100 :<_c1WTdIF4fDdF@GnF`R1
+R8
+32
+b1
+R19
+!i10b 1
+R25
+Z53 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/Andreas/OneDrive/uni/6. semester/FPGA/projekt/frm_test_util.vhd|
+Z54 !s107 C:/Users/Andreas/OneDrive/uni/6. semester/FPGA/projekt/frm_test_util.vhd|
+!i113 1
+R13
+R14
+Bbody
+R16
+R1
+R2
+R3
+R4
+l0
+L157
+Vj4FDn@SnD]D4Jj3;718]o2
+!s100 K<?7em172ZA`ehzE^K3[^1
+R8
+32
+R19
+!i10b 1
+R25
+R53
+R54
+!i113 1
+R13
+R14
+nbody
