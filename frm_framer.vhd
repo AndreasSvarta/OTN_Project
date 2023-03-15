@@ -43,9 +43,6 @@ signal	out_dat_int	: std_logic_vector(255 downto 0);
 begin
 
 in_dat_int <= in_dat;
-row_int <= row;
-column_int <= column;
-out_dat_int <= out_data;
 
 DUT_align : frm_align port map (clk,rst,in_dat_int,out_val_int,FAOOF_int,row_int,coloumn_int,out_dat_int);
 

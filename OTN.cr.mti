@@ -1,4 +1,15 @@
-{C:/Users/Andreas/OneDrive/uni/6. semester/FPGA/projekt/frm_gen.vhd} {1 {vcom -work work -2002 -explicit -stats=none {C:\Users\Andreas\OneDrive\uni\6. semester\FPGA\projekt\frm_gen.vhd}
+{C:/Users/Andreas/OneDrive/uni/6. semester/FPGA/projekt/frm_TB.vhd} {1 {vcom -work work -2002 -explicit -stats=none {C:/Users/Andreas/OneDrive/uni/6. semester/FPGA/projekt/frm_TB.vhd}
+Model Technology ModelSim ALTERA vcom 10.4b Compiler 2015.05 May 27 2015
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading package frm_test_util
+-- Compiling entity frm_TB
+-- Compiling architecture frm_TB_arch of frm_TB
+
+} {} {}} {C:/Users/Andreas/OneDrive/uni/6. semester/FPGA/projekt/frm_gen.vhd} {1 {vcom -work work -2002 -explicit -stats=none {C:\Users\Andreas\OneDrive\uni\6. semester\FPGA\projekt\frm_gen.vhd}
 Model Technology ModelSim ALTERA vcom 10.4b Compiler 2015.05 May 27 2015
 -- Loading package STANDARD
 -- Loading package TEXTIO
@@ -8,16 +19,6 @@ Model Technology ModelSim ALTERA vcom 10.4b Compiler 2015.05 May 27 2015
 -- Loading package frm_test_util
 -- Compiling entity frm_gen
 -- Compiling architecture frm_gen_0 of frm_gen
-
-} {} {}} {C:/Users/Andreas/OneDrive/uni/6. semester/FPGA/projekt/frm_align.vhd} {1 {vcom -work work -2002 -explicit -stats=none {C:/Users/Andreas/OneDrive/uni/6. semester/FPGA/projekt/frm_align.vhd}
-Model Technology ModelSim ALTERA vcom 10.4b Compiler 2015.05 May 27 2015
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package std_logic_arith
--- Loading package STD_LOGIC_UNSIGNED
--- Compiling entity frm_align
--- Compiling architecture frm_align_arch of frm_align
 
 } {} {}} {C:/Users/Andreas/OneDrive/uni/6. semester/FPGA/projekt/frm_demap.vhd} {1 {vcom -work work -2002 -explicit -stats=none {C:/Users/Andreas/OneDrive/uni/6. semester/FPGA/projekt/frm_demap.vhd}
 Model Technology ModelSim ALTERA vcom 10.4b Compiler 2015.05 May 27 2015
@@ -49,6 +50,16 @@ Model Technology ModelSim ALTERA vcom 10.4b Compiler 2015.05 May 27 2015
 -- Loading package STD_LOGIC_UNSIGNED
 -- Compiling entity frm_bip_8
 -- Compiling architecture frm_bip_8_arch of frm_bip_8
+
+} {} {}} {C:/Users/Andreas/OneDrive/uni/6. semester/FPGA/projekt/frm_framer.vhd} {1 {vcom -work work -2002 -explicit -stats=none {C:\Users\Andreas\OneDrive\uni\6. semester\FPGA\projekt\frm_framer.vhd}
+Model Technology ModelSim ALTERA vcom 10.4b Compiler 2015.05 May 27 2015
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Compiling entity frm_framer
+-- Compiling architecture fram_framer_arch of frm_framer
 
 } {} {}} {C:/Users/Andreas/OneDrive/uni/6. semester/FPGA/projekt/frm_test_util.vhd} {1 {vcom -work work -2002 -explicit -stats=none {C:/Users/Andreas/OneDrive/uni/6. semester/FPGA/projekt/frm_test_util.vhd}
 Model Technology ModelSim ALTERA vcom 10.4b Compiler 2015.05 May 27 2015
