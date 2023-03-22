@@ -23,6 +23,7 @@ architecture frm_align_arch of frm_align is
 
 signal in_dat_temp : std_logic_vector(255 downto 0);
 signal coloumn_temp : std_logic_vector(6 downto 0);
+signal long_fas : std_logic_vector(31 downto 0):=x"F6F62828";
 
 begin
 

@@ -32,7 +32,8 @@ port (
 	);
 end component;
 
-
+signal 	clk_int		: std_logic;
+signal 	rst_int		: std_logic;
 signal	in_dat_int	: std_logic_vector(255 downto 0);
 signal	out_val_int	: std_logic;
 signal	FAOOF_int	: std_logic;
@@ -43,11 +44,10 @@ signal	out_dat_int	: std_logic_vector(255 downto 0);
 begin
 
 in_dat_int <= in_dat;
-row_int <= row;
-column_int <= column;
-out_dat_int <= out_data;
+clk_int <= clk;
+rst_int <= rst;
 
-DUT_align : frm_align port map (clk,rst,in_dat_int,out_val_int,FAOOF_int,row_int,coloumn_int,out_dat_int);
+DUT_align : frm_align port map (clk_int,rst_int,in_dat_int,out_val_int,FAOOF_int,row_int,coloumn_int,out_dat_int);
 
 
 

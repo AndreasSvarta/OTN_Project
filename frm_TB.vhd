@@ -20,7 +20,7 @@ component frm_framer
 	in_val	: in std_logic;
 	out_val	: out std_logic;
 	row	: out std_logic_vector(1 downto 0);
-	coloumn	: out std_logic_vector(6 downto 0);
+	column	: out std_logic_vector(6 downto 0);
 	out_data: out std_logic_vector(255 downto 0)
 	);
 end component;
@@ -47,15 +47,12 @@ signal	out_dat_gen_TB	: std_logic_vector(255 downto 0);
 signal	in_val_TB	: std_logic;
 signal	out_val_TB	: std_logic;
 signal	row_TB		: std_logic_vector(1 downto 0);
-signal	coloumn_TB	: std_logic_vector(6 downto 0);
-
-
-
+signal	column_TB	: std_logic_vector(6 downto 0);
 
 
 begin
 frm_gen1 : frm_gen port map(clk_TB,reset_TB,out_dat_gen_TB,stat_TB,test_conf_TB,otn_oh_TB);
-DUT	 : frm_framer port map(clk_TB,reset_TB,in_dat_dut_TB,in_val_TB,out_val_TB,row_TB,coloumn_TB,out_data_TB);
+DUT	 : frm_framer port map(clk_TB,reset_TB,in_dat_dut_TB,in_val_TB,out_val_TB,row_TB,column_TB,out_data_TB);
 	in_dat_dut_TB <= out_dat_gen_TB;
       test_conf_TB.conf 	    <= "00";            
       test_conf_TB.cbr_map     	    <='1';     

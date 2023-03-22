@@ -13,7 +13,7 @@ port (
 	out_val	: out std_logic;
 	FAOOF	: out std_logic;
 	row	: out std_logic_vector(1 downto 0);
-	coloumn	: out std_logic_vector(6 downto 0);
+	column	: out std_logic_vector(6 downto 0);
 	out_dat	: out std_logic_vector(255 downto 0)
 	);
 end entity;
@@ -22,7 +22,8 @@ end entity;
 architecture frm_align_arch of frm_align is
 
 signal in_dat_temp : std_logic_vector(255 downto 0);
-signal coloumn_temp : std_logic_vector(6 downto 0);
+signal column_temp : std_logic_vector(6 downto 0);
+signal long_fas : std_logic_vector(31 downto 0):=x"F6F62828";
 
 begin
 
@@ -30,10 +31,10 @@ in_dat_temp <= in_dat;
 
 process(clk)
 begin
---coloumn_temp <= "0000000";
+column_temp <= "0000000";
 
 end process;
-coloumn <= "0000000";
+column <= column_temp;
 
 
 end architecture;
