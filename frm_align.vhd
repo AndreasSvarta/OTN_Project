@@ -2,6 +2,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 --use ieee.std_logic_arith.all;
 use ieee.std_logic_unsigned.all;
+use IEEE.NUMERIC_STD.all;
 use std.textio.all;
 
 
@@ -22,14 +23,15 @@ end entity;
 architecture frm_align_arch of frm_align is
 
 signal in_dat_buffer 	: std_logic_vector(255 downto 0);
-signal column_temp 	: std_logic_vector(6 downto 0);
+signal column_temp 	: std_logic_vector(6 downto 0):="0000000";
+signal row_temp		: std_logic_vector(1 downto 0):="00";
 signal long_fas 	: std_logic_vector(31 downto 0):=x"F6F62828";
 signal short_fas 	: std_logic_vector(23 downto 0):=x"F62828";
 signal long_faoof	: std_logic_vector(1 downto 0):="00";
 signal short_faoof	: std_logic :='0';
 signal short_error_cnt	: std_logic_vector(1 downto 0):="00";
 signal FAOOF_temp 	: std_logic:='1';
-signal cnt_test		: integer:=0;
+signal cnt_frame_510	: integer:=0;
 signal frm_nr_int	: integer:=0;
 signal index		: integer:=0;
 
@@ -37,26 +39,43 @@ begin
 
 --in_dat_buffer <= in_dat;
 
+
 process(clk)
 begin
 
 if rising_edge(clk) and rst = '0' then
 	in_dat_buffer <= in_dat;
+	
+	cnt_frame_510 <= cnt_frame_510 + 1;
 
-	cnt_test <= cnt_test + 1;
+	if column_temp = "1111110" and (row_temp = "00" or row_temp = "10") then
+	column_temp <= "0000000";
+	row_temp <= row_temp + "1";
+	elsif column_temp = "1111111" and (row_temp = "01" or row_temp = "11") then
+	column_temp <= "0000000";
+	row_temp <= row_temp + "1";
+	else
+	column_temp <= column_temp + "1";
+	end if;
 
 	for i in 0 to 255-32 loop
-		if in_dat(i+31 downto i) = long_fas then
-			long_faoof <= long_faoof + "1";
-			cnt_test <= 1;
-			index <= i-214;
+		if in_dat(255-i downto 255-31-i) = long_fas then --hvis lang FAS fundet
+			if (column_temp = "0000001" and row_temp = "00") or (row_temp = "11" and column_temp = "1111111") or (row_temp = "11" and column_temp = "1111110")then
+				long_faoof <= long_faoof + "1";
+				column_temp <= "0000000";
+				frm_nr_int <= frm_nr_int + 100;
+				exit;
+
+			else -- nulstiller hvis den ikke findes på korrekt index
+				long_faoof <= "00";
+report "The value of 'a' is " & integer'image(index+1);
+			end if;
+			cnt_frame_510 <= 1;
+			index <= i-8;
+		elsif long_faoof = "01" and column_temp = "1111111" and row_temp = "11" then
+			long_faoof <= "00";
 		end if;
 	end loop;
-
-	if cnt_test > 510 then
-		long_faoof <= "00";
-		cnt_test <= 1;
-	end if;
 
 	if long_faoof = "10" then
 		long_faoof <= "00";
@@ -65,11 +84,11 @@ if rising_edge(clk) and rst = '0' then
 	
 
 	if FAOOF_temp = '0' then
-		for i in 0 to 255-32 loop
-			if in_dat(i+31 downto i) = short_fas then
+		for i in 0 to 255-24 loop
+			if in_dat(i+23 downto i) = short_fas then
 				FAOOF_temp <= '0';
-			elsif cnt_test > 510 then
-				cnt_test <= 1;
+			elsif cnt_frame_510 > 510 then
+				cnt_frame_510 <= 1;
 				short_error_cnt <= short_error_cnt + "1";
 				if short_error_cnt = "11" then
 					FAOOF_temp <= '1';
@@ -84,11 +103,12 @@ if rising_edge(clk) and rst = '0' then
 		out_dat <= in_dat_buffer(255-index downto 0) & in_dat(255 downto 255-index+1);
 	end if;
 
+column <= column_temp;
+row <= row_temp;
 end if;
 
 
 end process;
-column <= column_temp;
 FAOOF <= FAOOF_temp;
 
 end architecture;
