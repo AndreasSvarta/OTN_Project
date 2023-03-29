@@ -1,7 +1,8 @@
 library ieee;
 use ieee.std_logic_1164.all;
-use ieee.std_logic_arith.all;
+--use ieee.std_logic_arith.all;
 use ieee.std_logic_unsigned.all;
+use IEEE.NUMERIC_STD.all;
 use std.textio.all;
 use work.frm_test_util.all;
 
@@ -70,7 +71,7 @@ DUT	 : frm_framer port map(clk_TB,reset_TB,in_dat_dut_TB,in_val_TB,out_val_TB,ro
       otn_oh_TB.data         <=  (others => '0');
       otn_oh_TB.fas_pos      <=  511;
  
-      otn_oh_TB.FAS          <=  x"f6f6f6282828";
+--      otn_oh_TB.FAS          <=  x"f6f6f6282828";
       otn_oh_TB.MFAS         <=  (others => '0');
       otn_oh_TB.SM_TTI       <=  (others => '0');
       otn_oh_TB.SM_BIP8      <=  (others => '0');
@@ -148,6 +149,19 @@ DUT	 : frm_framer port map(clk_TB,reset_TB,in_dat_dut_TB,in_val_TB,out_val_TB,ro
       otn_oh_TB.odu3lck      <=  (others => '0');
                  
       otn_oh_TB.cbr_ais      <=  (others => '0');
+
+    process(stat_TB.frm_nr)
+	begin
+	case to_integer(unsigned(stat_TB.frm_nr)) is
+	when 0 to 2 =>
+		otn_oh_TB.FAS <= x"111111111111";
+	when others =>
+		otn_oh_TB.FAS <= x"F6F6F6282828";
+	end case;
+
+
+    end process;
+
 
     clk_STIM : PROCESS
     BEGIN

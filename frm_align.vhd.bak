@@ -21,7 +21,7 @@ end entity;
 
 architecture frm_align_arch of frm_align is
 
-signal in_dat_temp 	: std_logic_vector(255 downto 0);
+signal in_dat_buffer 	: std_logic_vector(255 downto 0);
 signal column_temp 	: std_logic_vector(6 downto 0);
 signal long_fas 	: std_logic_vector(31 downto 0):=x"F6F62828";
 signal short_fas 	: std_logic_vector(23 downto 0):=x"F62828";
@@ -31,15 +31,17 @@ signal short_error_cnt	: std_logic_vector(1 downto 0):="00";
 signal FAOOF_temp 	: std_logic:='1';
 signal cnt_test		: integer:=0;
 signal frm_nr_int	: integer:=0;
+signal index		: integer:=0;
 
 begin
 
-in_dat_temp <= in_dat;
+--in_dat_buffer <= in_dat;
 
 process(clk)
 begin
 
 if clk = '1' and rst = '0' then
+	in_dat_buffer <= in_dat;
 
 	cnt_test <= cnt_test + 1;
 
@@ -47,6 +49,7 @@ if clk = '1' and rst = '0' then
 		if in_dat(i+31 downto i) = long_fas then
 			long_faoof <= long_faoof + "1";
 			cnt_test <= 1;
+			index <= i-214;
 		end if;
 	end loop;
 
@@ -59,6 +62,7 @@ if clk = '1' and rst = '0' then
 		long_faoof <= "00";
 		FAOOF_temp <= '0';
 	end if;
+	
 
 	if FAOOF_temp = '0' then
 		for i in 0 to 255-32 loop
@@ -72,6 +76,12 @@ if clk = '1' and rst = '0' then
 				end if;
 			end if;
 		end loop;
+	end if;
+
+	if index = 0 then
+		out_dat <= in_dat_buffer;
+	elsif index > 0 then
+		out_dat <= in_dat_buffer(255-index downto 0) & in_dat(255 downto 255-index+1);
 	end if;
 
 end if;
