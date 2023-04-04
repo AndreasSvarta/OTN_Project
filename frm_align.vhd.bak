@@ -34,6 +34,7 @@ signal FAOOF_temp 	: std_logic:='1';
 signal cnt_frame_510	: integer:=0;
 signal frm_nr_int	: integer:=0;
 signal index		: integer:=0;
+signal index_check	: integer:=0;
 
 begin
 
@@ -61,19 +62,23 @@ if rising_edge(clk) and rst = '0' then
 	for i in 0 to 255-32 loop
 		if in_dat(255-i downto 255-31-i) = long_fas then --hvis lang FAS fundet
 			if (column_temp = "0000001" and row_temp = "00") or (row_temp = "11" and column_temp = "1111111") or (row_temp = "11" and column_temp = "1111110")then
+				if (index_check = i) or long_faoof = "00" then
 				long_faoof <= long_faoof + "1";
 				column_temp <= "0000000";
-				frm_nr_int <= frm_nr_int + 100;
-				exit;
-report "The value of 'a' is " & integer'image(index);
+				index <= i-8;
+				index_check <= i;
+				else
+				long_faoof <= "01";
+				end if;
+				exit; --exit loop
+
 			else -- nulstiller hvis den ikke findes på korrekt index
 				long_faoof <= "00";
 report "The value of 'a' is " & integer'image(index+1);
 			end if;
 			cnt_frame_510 <= 1;
-			index <= i-8;
+
 		elsif long_faoof = "01" and column_temp = "1111111" and row_temp = "11" then
-report "The value of 'a' is " & integer'image(index+2);
 			long_faoof <= "00";
 		end if;
 	end loop;
