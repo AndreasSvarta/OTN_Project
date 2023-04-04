@@ -174,8 +174,23 @@ DUT	 : frm_framer port map(clk_TB,reset_TB,in_dat_dut_TB,in_val_TB,out_val_TB,ro
 	when 6 =>
 		otn_oh_TB.FAS <= x"F6F6F6282828";
 		otn_oh_TB.fas_pos <=  511;
-	when others =>
+	when 7 =>
 		otn_oh_TB.FAS <= x"FFFFFFFFFFFF";
+		otn_oh_TB.fas_pos <=  510;
+	when 8 => 
+		otn_oh_TB.FAS <= x"FFFFFFFFFFFF";
+		otn_oh_TB.fas_pos <=  511;
+	when 9 =>
+		otn_oh_TB.FAS <= x"FFFFFFFFFFFF";
+		otn_oh_TB.fas_pos <=  510;
+	when 10 =>
+		otn_oh_TB.FAS <= x"FFFFFFFFFFFF";
+		otn_oh_TB.fas_pos <=  511;
+	when 11=>
+		otn_oh_TB.FAS <= x"FFFFFFFFFFFF";
+		otn_oh_TB.fas_pos <=  511;
+	when others =>
+		otn_oh_TB.FAS <= x"F6F6F6282828";
 		otn_oh_TB.fas_pos <=  511;
 	end case;
 

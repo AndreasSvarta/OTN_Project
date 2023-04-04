@@ -47,7 +47,7 @@ begin
 if rising_edge(clk) and rst = '0' then
 	in_dat_buffer <= in_dat;
 	
-	cnt_frame_510 <= cnt_frame_510 + 1;
+--	cnt_frame_510 <= cnt_frame_510 + 1;
 
 	if column_temp = "1111110" and (row_temp = "00" or row_temp = "10") then
 	column_temp <= "0000000";
@@ -59,6 +59,7 @@ if rising_edge(clk) and rst = '0' then
 	column_temp <= column_temp + "1";
 	end if;
 
+	if FAOOF_temp = '1' then
 	for i in 0 to 255-32 loop
 		if in_dat(255-i downto 255-31-i) = long_fas then --hvis lang FAS fundet
 			if (column_temp = "0000001" and row_temp = "00") or (row_temp = "11" and column_temp = "1111111") or (row_temp = "11" and column_temp = "1111110")then
@@ -79,32 +80,49 @@ if rising_edge(clk) and rst = '0' then
 				long_faoof <= "00";
 report "The value of 'a' is " & integer'image(index+1);
 			end if;
-			cnt_frame_510 <= 1;
+--			cnt_frame_510 <= 1;
 
 		elsif long_faoof = "01" and column_temp = "1111111" and row_temp = "11" then
 			long_faoof <= "00";
 		end if;
 	end loop;
+	end if; -- faoof = '1' loop
 
 	if long_faoof = "10" then
 		long_faoof <= "00";
 		FAOOF_temp <= '0';
 	end if;
 	
-
-	if FAOOF_temp = '0' then
-		for i in 0 to 255-24 loop
-			if in_dat(i+23 downto i) = short_fas then
-				FAOOF_temp <= '0';
-			elsif cnt_frame_510 > 510 then
-				cnt_frame_510 <= 1;
-				short_error_cnt <= short_error_cnt + "1";
-				if short_error_cnt = "11" then
-					FAOOF_temp <= '1';
-				end if;
-			end if;
-		end loop;
+if FAOOF_temp = '0' then
+  if (row_temp = "11" and column_temp = "1111111")then
+    for i in 0 to 255-24 loop
+      if in_dat(255-i downto 255-23-i) = short_fas then
+	report "The value of 'i' is " & integer'image(i);
+	report "The value of 'i-16' is " & integer'image(i-16);
+	report "The value of 'index' is " & integer'image(index);
+	if (i-16 = index) then
+	  report "short FAS found, correct index";
+	  column_temp <= "0000000";
+	  FAOOF_temp <= '0';
+	  exit;
+	else
+	  report "short FAS found, WRONG index " & integer'image(i); 
+	  short_error_cnt <= short_error_cnt + "1";
+	  if short_error_cnt = "11" then
+	    FAOOF_temp <= '1';
+	  end if;
 	end if;
+      elsif i = 255-24 then
+	report "short FAS not found " & integer'image(i);
+	short_error_cnt <= short_error_cnt + "1";
+	if short_error_cnt = "11" then
+	  FAOOF_temp <= '1';
+	end if;
+      end if;
+    end loop;
+  end if;
+end if;
+	
 
 	if index = 0 then
 		out_dat <= in_dat_buffer;
