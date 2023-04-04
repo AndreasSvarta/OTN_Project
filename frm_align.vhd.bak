@@ -11,7 +11,6 @@ port (
 	clk	: in std_logic;
 	rst	: in std_logic;
 	in_dat	: in std_logic_vector(255 downto 0);
-	out_val	: out std_logic;
 	FAOOF	: out std_logic;
 	row	: out std_logic_vector(1 downto 0);
 	column	: out std_logic_vector(6 downto 0);
@@ -23,18 +22,17 @@ end entity;
 architecture frm_align_arch of frm_align is
 
 signal in_dat_buffer 	: std_logic_vector(255 downto 0);
-signal column_temp 	: std_logic_vector(6 downto 0):="0000000";
-signal row_temp		: std_logic_vector(1 downto 0):="00";
+signal column_temp 	: std_logic_vector(6 downto 0):="1111010";
+signal row_temp		: std_logic_vector(1 downto 0):="11";
 signal long_fas 	: std_logic_vector(31 downto 0):=x"F6F62828";
 signal short_fas 	: std_logic_vector(23 downto 0):=x"F62828";
 signal long_faoof	: std_logic_vector(1 downto 0):="00";
 signal short_faoof	: std_logic :='0';
 signal short_error_cnt	: std_logic_vector(1 downto 0):="00";
 signal FAOOF_temp 	: std_logic:='1';
-signal cnt_frame_510	: integer:=0;
-signal frm_nr_int	: integer:=0;
-signal index		: integer:=0;
-signal index_check	: integer:=0;
+signal index		: std_logic_vector(7 downto 0):="00000000";
+signal index_faoof_0	: std_logic_vector(7 downto 0):="00000000";
+signal index_check	: integer range -8 to 255 :=0;
 
 begin
 
@@ -46,8 +44,6 @@ begin
 
 if rising_edge(clk) and rst = '0' then
 	in_dat_buffer <= in_dat;
-	
---	cnt_frame_510 <= cnt_frame_510 + 1;
 
 	if column_temp = "1111110" and (row_temp = "00" or row_temp = "10") then
 	column_temp <= "0000000";
@@ -62,25 +58,31 @@ if rising_edge(clk) and rst = '0' then
 	if FAOOF_temp = '1' then
 	for i in 0 to 255-32 loop
 		if in_dat(255-i downto 255-31-i) = long_fas then --hvis lang FAS fundet
-			if (column_temp = "0000001" and row_temp = "00") or (row_temp = "11" and column_temp = "1111111") or (row_temp = "11" and column_temp = "1111110")then
-				if (index_check = i) or long_faoof = "00" then
+report "The value of 'i' is " & integer'image(i);
+report "The value of 'index_check' is " & integer'image(index_check);
+report "The value of 'index_check+8' is " & integer'image(index_check+8);
+			if (row_temp = "11" and column_temp = "1111111") then
+				if (index_check+8 = i) then
 				long_faoof <= long_faoof + "1";
 				column_temp <= "0000000";
-				index <= i-8;
+				index <= i-"00001000";
 				index_check <= i;
+report "nue r vi her";
 				else
+report "eler måske her";
 				long_faoof <= "01";
 				column_temp <= "0000000";
-				index <= i-8;
+				index <= i-"00001000";
 				index_check <= i;
 				end if;
 				exit; --exit loop
 
-			else -- nulstiller hvis den ikke findes på korrekt index
-				long_faoof <= "00";
-report "The value of 'a' is " & integer'image(index+1);
+			else -- nulstiller hvis den ikke findes på korrekt index, men dog findes
+				column_temp <= "0000000";
+				row_temp <= "00";
+				long_faoof <= "01";
+report "The value of 'a' is " & integer'image(to_integer(unsigned(index)));
 			end if;
---			cnt_frame_510 <= 1;
 
 		elsif long_faoof = "01" and column_temp = "1111111" and row_temp = "11" then
 			long_faoof <= "00";
@@ -97,16 +99,17 @@ if FAOOF_temp = '0' then
   if (row_temp = "11" and column_temp = "1111111")then
     for i in 0 to 255-24 loop
       if in_dat(255-i downto 255-23-i) = short_fas then
+	index_faoof_0 <= i - "00010000";
 	report "The value of 'i' is " & integer'image(i);
 	report "The value of 'i-16' is " & integer'image(i-16);
-	report "The value of 'index' is " & integer'image(index);
-	if (i-16 = index) then
-	  report "correct sequence and index";
+	report "The value of 'index_faoof_0' is " & integer'image(to_integer(unsigned(index_faoof_0)));
+	if (i-16 = index_faoof_0) then
+	  report "short FAS found, correct index";
 	  column_temp <= "0000000";
-	  FAOOF_temp <= '0';
+	  short_error_cnt <= "00";
 	  exit;
 	else
-	  report "correct sequence WRONG index " & integer'image(i); 
+	  report "short FAS found, WRONG index " & integer'image(i); 
 	  short_error_cnt <= short_error_cnt + "1";
 	  if short_error_cnt = "11" then
 	    FAOOF_temp <= '1';
@@ -127,7 +130,7 @@ end if;
 	if index = 0 then
 		out_dat <= in_dat_buffer;
 	elsif index > 0 then
-		out_dat <= in_dat_buffer(255-index downto 0) & in_dat(255 downto 255-index+1);
+		out_dat <= in_dat_buffer(255-to_integer(unsigned(index)) downto 0) & in_dat(255 downto 255-to_integer(unsigned(index))+1);
 	end if;
 
 column <= column_temp;

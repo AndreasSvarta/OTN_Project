@@ -154,11 +154,11 @@ DUT	 : frm_framer port map(clk_TB,reset_TB,in_dat_dut_TB,in_val_TB,out_val_TB,ro
 	begin
 	case to_integer(unsigned(stat_TB.frm_nr)) is
 	when 0 =>
-		otn_oh_TB.FAS <= x"FFFFFFFFFFFF";
-		otn_oh_TB.fas_pos <=  510;
+		otn_oh_TB.FAS <= x"F6F6F6282828";
+		otn_oh_TB.fas_pos <=  511;
 	when 1 =>
 		otn_oh_TB.FAS <= x"F6F6F6282828";
-		otn_oh_TB.fas_pos <=  510;
+		otn_oh_TB.fas_pos <=  511;
 	when 2 =>
 		otn_oh_TB.FAS <= x"F6F6F6282828";
 		otn_oh_TB.fas_pos <=  511;
