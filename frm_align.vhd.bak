@@ -62,7 +62,7 @@ report "The value of 'i' is " & integer'image(i);
 report "The value of 'index_check' is " & integer'image(index_check);
 report "The value of 'index_check+8' is " & integer'image(index_check+8);
 			if (row_temp = "11" and column_temp = "1111111") then
-				if (index_check+8 = i) then
+				if (index_check = i) then
 				long_faoof <= long_faoof + "1";
 				column_temp <= "0000000";
 				index <= i-"00001000";

@@ -39,7 +39,7 @@ begin
 --in_dat_buffer <= in_dat;
 
 
-process(clk)
+process(clk,rst)
 begin
 
 if rising_edge(clk) and rst = '0' then

@@ -200,9 +200,9 @@ DUT	 : frm_framer port map(clk_TB,reset_TB,in_dat_dut_TB,in_val_TB,out_val_TB,ro
     clk_STIM : PROCESS
     BEGIN
         clk_TB <= '0';
-        WAIT FOR 4 ns;
+        WAIT FOR 5 ns;
         clk_TB <= '1';
-        WAIT FOR 4 ns;
+        WAIT FOR 5 ns;
     END PROCESS;
 
     rst_STIM : PROCESS
