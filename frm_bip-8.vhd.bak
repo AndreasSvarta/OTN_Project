@@ -46,7 +46,7 @@ if rising_edge(clk) then
 	else
 		if in_val = '0' then
 			if row = "11" and column = "1111111" then
-				bip_err <= bip_err_temp xor bip_err;
+				bip_err <= bip_err_temp;
 				bip_err_temp <= '0';
 			else
 				for i in 0 to 255 loop

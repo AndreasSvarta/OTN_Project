@@ -34,7 +34,7 @@ begin
 
 process (clk,rst)
 
-variable result : std_logic := '0';
+--variable result : std_logic := '0';
 
 begin
 
@@ -43,19 +43,9 @@ if rising_edge(clk) then
 		bip_err <= '0';
 		bip_err_temp <= '0';
 		out_val <= '0';
-	else
-		if in_val = '0' then
-			if row = "11" and column = "1111111" then
-				bip_err <= bip_err_temp;
-				bip_err_temp <= '0';
-			else
-				for i in 0 to 255 loop
-					result := result xor in_dat(i);
-				end loop;
-				bip_err_temp <= result;
-report "in_dat= " & to_hstring(in_dat);
-			end if;
-		end if;
+	elsif in_val = '0' then
+		out_val <= '1';
+
 	end if;
 
 end if;
