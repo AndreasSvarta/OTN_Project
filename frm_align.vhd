@@ -28,11 +28,11 @@ signal long_fas 	: std_logic_vector(31 downto 0):=x"F6F62828";
 signal short_fas 	: std_logic_vector(23 downto 0):=x"F62828";
 signal long_faoof	: std_logic_vector(1 downto 0):="00";
 signal short_faoof	: std_logic :='0';
-signal short_error_cnt	: std_logic_vector(1 downto 0):="00";
+signal short_error_cnt	: std_logic_vector(2 downto 0):="000";
 signal FAOOF_temp 	: std_logic:='1';
 signal index		: std_logic_vector(7 downto 0):="00000000";
 --signal index_faoof_0	: std_logic_vector(7 downto 0):="00000000";
-signal index_check	: integer range -8 to 255 :=0;
+signal index_check	: integer range -80 to 300 :=0;
 signal in_dat_512	: std_logic_vector(511 downto 0);
 signal out_dat_temp	: std_logic_vector(255 downto 0);
 
@@ -60,7 +60,7 @@ if rising_edge(clk) and rst = '0' then
 	if FAOOF_temp = '1' then
 --	for i in 0 to 255-31 loop
 	for i in 0 to 255 loop
-		if in_dat_512(511-i downto 511-31-i) = long_fas then --hvis lang FAS fundet
+		if in_dat_512(511-i-8 downto 511-31-8-i) = long_fas then --hvis lang FAS fundet
 --		if in_dat(255-i downto 255-31-i) = long_fas then --hvis lang FAS fundet
 report "The value of 'i' is " & integer'image(i);
 report "The value of 'index_check' is " & integer'image(index_check);
@@ -77,8 +77,9 @@ report "The value of 'index_check+8' is " & integer'image(index_check+8);
 				index <= i-"00001000";
 				index_check <= i;
 				exit; --exit loop
-
-			else -- nulstiller hvis den ikke findes på korrekt index, men dog findes
+			elsif long_faoof /= "01" then -- nulstiller hvis den ikke findes på korrekt index, men dog findes
+				index <= i-"00001000";
+				index_check <= i;
 				column_temp <= "0000000";
 				row_temp <= "00";
 				long_faoof <= "01";
@@ -89,7 +90,7 @@ report "The value of 'a' is " & integer'image(to_integer(unsigned(index)));
 			long_faoof <= "00";
 		end if;
 	end loop;
-  out_dat_temp <= in_dat_512(511-to_integer(unsigned(index)) downto 511-255-to_integer(unsigned(index)));
+  out_dat_temp <= in_dat_512(511-8-to_integer(unsigned(index)) downto 511-255-8-to_integer(unsigned(index)));
 end if; -- faoof = '1' loop
 
 	if long_faoof = "10" then
@@ -99,18 +100,18 @@ end if; -- faoof = '1' loop
 	
 if FAOOF_temp = '0' then
   if (row_temp = "11" and column_temp = "1111111")then
-    if in_dat_512(511-to_integer(unsigned(index))-16 downto 511-23-to_integer(unsigned(index))-16) = short_fas then
+    if in_dat_512(511-16-8-to_integer(unsigned(index)) downto 511-23-16-8-to_integer(unsigned(index))) = short_fas then
 	report "Short fas at correct index found";
-	short_error_cnt <= "00";
+	short_error_cnt <= "000";
     else
 	report "Short fas NOT found or not at correct index";
 	short_error_cnt <= short_error_cnt + "1";
-	if short_error_cnt = "11" then
+	if short_error_cnt = "100" then
 	  FAOOF_temp <= '1';
 	end if;
     end if;
   end if;
-  out_dat_temp <= in_dat_512(511-to_integer(unsigned(index)) downto 511-255-to_integer(unsigned(index)));
+  out_dat_temp <= in_dat_512(511-8-to_integer(unsigned(index)) downto 511-255-8-to_integer(unsigned(index)));
 end if;
 	
 

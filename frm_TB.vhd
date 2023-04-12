@@ -150,48 +150,15 @@ DUT	 : frm_framer port map(clk_TB,reset_TB,in_dat_dut_TB,in_val_TB,out_val_TB,ro
                  
       otn_oh_TB.cbr_ais      <=  (others => '0');
 
-    process(stat_TB.frm_nr)
+    process(stat_TB.frm_nr) -- test til FAS position og FAS sekvens
 	begin
 	case to_integer(unsigned(stat_TB.frm_nr)) is
 	when 0 =>
 		otn_oh_TB.FAS <= x"F6F6F6282828";
 		otn_oh_TB.fas_pos <=  511;
-	when 1 =>
-		otn_oh_TB.FAS <= x"F6F6F6282828";
-		otn_oh_TB.fas_pos <=  511;
-	when 2 =>
-		otn_oh_TB.FAS <= x"F6F6F6282828";
-		otn_oh_TB.fas_pos <=  511;
-	when 3 =>
-		otn_oh_TB.FAS <= x"F6F6F6282828";
-		otn_oh_TB.fas_pos <=  510;
-	when 4 => 
-		otn_oh_TB.FAS <= x"F6F6F6282828";
-		otn_oh_TB.fas_pos <=  511;
-	when 5 => 
-		otn_oh_TB.FAS <= x"F6F6F6282828";
-		otn_oh_TB.fas_pos <=  511;
-	when 6 =>
-		otn_oh_TB.FAS <= x"F6F6F6282828";
-		otn_oh_TB.fas_pos <=  511;
-	when 7 =>
-		otn_oh_TB.FAS <= x"FFFFFFFFFFFF";
-		otn_oh_TB.fas_pos <=  510;
-	when 8 => 
-		otn_oh_TB.FAS <= x"FFFFFFFFFFFF";
-		otn_oh_TB.fas_pos <=  511;
-	when 9 =>
-		otn_oh_TB.FAS <= x"FFFFFFFFFFFF";
-		otn_oh_TB.fas_pos <=  510;
-	when 10 =>
-		otn_oh_TB.FAS <= x"FFFFFFFFFFFF";
-		otn_oh_TB.fas_pos <=  511;
-	when 11=>
-		otn_oh_TB.FAS <= x"FFFFFFFFFFFF";
-		otn_oh_TB.fas_pos <=  511;
 	when others =>
 		otn_oh_TB.FAS <= x"F6F6F6282828";
-		otn_oh_TB.fas_pos <=  511;
+		otn_oh_TB.fas_pos <=  511-8;
 	end case;
 
     end process;
