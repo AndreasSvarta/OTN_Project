@@ -10,7 +10,7 @@ port (
 	rst	: in std_logic;
 	clk	: in std_logic;
 	in_dat	: in std_logic_vector(255 downto 0);
-	in_val	: in std_logic
+	in_val	: in std_logic;
 	out_dat	: out std_logic_vector(255 downto 0)
 	);
 end entity;
