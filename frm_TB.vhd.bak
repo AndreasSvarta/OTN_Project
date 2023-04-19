@@ -36,9 +36,21 @@ component frm_gen
     otn_oh      : in    otn_overhead_type
     );
 end component;
+
+component frm_ana
+  port (
+    clk         : in    std_logic;
+    reset       : in    std_logic;
+    in_data     : in    std_logic_vector(255 downto 0);
+    test_conf   : in    test_config_type;
+    otn_oh      : out   otn_overhead_type 
+    );
+end component;
+
 signal	  stat_TB	 	:    gen_stat_type;
 signal    test_conf_TB   	:    test_config_type; 
 signal    otn_oh_TB      	:    otn_overhead_type;
+signal    otn_oh_ana_TB      	:    otn_overhead_type;
 signal	  clk_TB,reset_TB       :    std_logic;
 signal	  out_data_TB    	:    std_logic_vector(255 downto 0);
 
@@ -53,16 +65,17 @@ signal	column_TB	: std_logic_vector(6 downto 0);
 
 begin
 frm_gen1 : frm_gen port map(clk_TB,reset_TB,out_dat_gen_TB,stat_TB,test_conf_TB,otn_oh_TB);
+frm_ana1 : frm_ana port map(clk_TB,reset_TB,out_data_TB,test_conf_TB,otn_oh_ana_TB);
 DUT	 : frm_framer port map(clk_TB,reset_TB,in_dat_dut_TB,in_val_TB,out_val_TB,row_TB,column_TB,out_data_TB);
 	in_dat_dut_TB <= out_dat_gen_TB;
       test_conf_TB.conf 	    <= "00";            
       test_conf_TB.cbr_map     	    <='1';     
-      test_conf_TB.prbs             <='0';
+      test_conf_TB.prbs             <='0'; --'1' pseudorandom
       test_conf_TB.clk_mode         <=0;
       test_conf_TB.disable_gen      <='0';
       test_conf_TB.disable_ana      <='0';
       test_conf_TB.otn_scr_inh_gen  <='0';
-      test_conf_TB.otn_scr_inh_ana  <='0'; 
+      test_conf_TB.otn_scr_inh_ana  <='1'; 
       test_conf_TB.txt    	    <="00";
 
       otn_oh_TB.frm_nr       <=  (others => '0');
@@ -74,7 +87,7 @@ DUT	 : frm_framer port map(clk_TB,reset_TB,in_dat_dut_TB,in_val_TB,out_val_TB,ro
 --      otn_oh_TB.FAS          <=  x"f6f6f6282828";
       otn_oh_TB.MFAS         <=  (others => '0');
       otn_oh_TB.SM_TTI       <=  (others => '0');
-      otn_oh_TB.SM_BIP8      <=  (others => '0');
+--      otn_oh_TB.SM_BIP8      <=  (others => '0');
       otn_oh_TB.SM_AUX       <=  (others => '0');
       otn_oh_TB.GCC0         <=  (others => '0');
       otn_oh_TB.OTU3_RES     <=  (others => '0');
@@ -150,16 +163,19 @@ DUT	 : frm_framer port map(clk_TB,reset_TB,in_dat_dut_TB,in_val_TB,out_val_TB,ro
                  
       otn_oh_TB.cbr_ais      <=  (others => '0');
 
-    process(stat_TB.frm_nr) -- test til FAS position og FAS sekvens
+    process(stat_TB.frm_nr) -- test til aligner
 	begin
 	case to_integer(unsigned(stat_TB.frm_nr)) is
 	when 0 =>
 		otn_oh_TB.FAS <= x"F6F6F6282828";
-		otn_oh_TB.fas_pos <=  511-255;
+		otn_oh_TB.fas_pos <=  511;
+	
 	when others =>
 		otn_oh_TB.FAS <= x"F6F6F6282828";
-		otn_oh_TB.fas_pos <=  511-8;
+		otn_oh_TB.fas_pos <=  511;
 	end case;
+		otn_oh_TB.FAS <= x"F6F6F6282828"; --for at ignorere case
+		otn_oh_TB.fas_pos <=  511;	  --for at ignorere case
 
     end process;
 

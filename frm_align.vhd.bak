@@ -22,7 +22,7 @@ end entity;
 architecture frm_align_arch of frm_align is
 
 signal in_dat_buffer 	: std_logic_vector(255 downto 0);
-signal column_temp 	: std_logic_vector(6 downto 0):="1111010";
+signal column_temp 	: std_logic_vector(6 downto 0):="1111101";
 signal row_temp		: std_logic_vector(1 downto 0):="11";
 signal long_fas 	: std_logic_vector(31 downto 0):=x"F6F62828";
 signal short_fas 	: std_logic_vector(23 downto 0):=x"F62828";
@@ -44,7 +44,10 @@ in_dat_512 <= in_dat_buffer & in_dat;
 process(clk,rst)
 begin
 
-if rising_edge(clk) and rst = '0' then
+if rising_edge(clk) then
+if rst = '1' then 
+
+else
 	in_dat_buffer <= in_dat;
 
 	if column_temp = "1111110" and (row_temp = "00" or row_temp = "10") then
@@ -90,7 +93,7 @@ report "The value of 'a' is " & integer'image(to_integer(unsigned(index)));
 			long_faoof <= "00";
 		end if;
 	end loop;
-  	out_dat_temp <= in_dat_512(511-8-8-to_integer(unsigned(index)) downto 511-255-8-8-to_integer(unsigned(index)));
+  	out_dat_temp <= in_dat_512(511-to_integer(unsigned(index)) downto 511-255-to_integer(unsigned(index)));
 end if; -- faoof = '1' loop
 
 if long_faoof = "10" then
@@ -100,7 +103,7 @@ end if;
 	
 if FAOOF_temp = '0' then
   if (row_temp = "11" and column_temp = "1111111")then
-    if in_dat_512(511-16-8-8-to_integer(unsigned(index)) downto 511-23-16-8-8-to_integer(unsigned(index))) = short_fas then
+    if in_dat_512(511-16-to_integer(unsigned(index)) downto 511-23-16-to_integer(unsigned(index))) = short_fas then
 	report "Short fas at correct index found";
 	short_error_cnt <= "000";
     else
@@ -111,7 +114,7 @@ if FAOOF_temp = '0' then
 	end if;
     end if;
   end if;
-  out_dat_temp <= in_dat_512(511-8-8-to_integer(unsigned(index)) downto 511-255-8-8-to_integer(unsigned(index)));
+  out_dat_temp <= in_dat_512(511-to_integer(unsigned(index)) downto 511-255-to_integer(unsigned(index)));
 end if;
 	
 

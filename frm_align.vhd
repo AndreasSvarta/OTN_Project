@@ -22,7 +22,7 @@ end entity;
 architecture frm_align_arch of frm_align is
 
 signal in_dat_buffer 	: std_logic_vector(255 downto 0);
-signal column_temp 	: std_logic_vector(6 downto 0):="1111010";
+signal column_temp 	: std_logic_vector(6 downto 0):="1111101";
 signal row_temp		: std_logic_vector(1 downto 0):="11";
 signal long_fas 	: std_logic_vector(31 downto 0):=x"F6F62828";
 signal short_fas 	: std_logic_vector(23 downto 0):=x"F62828";
@@ -44,7 +44,10 @@ in_dat_512 <= in_dat_buffer & in_dat;
 process(clk,rst)
 begin
 
-if rising_edge(clk) and rst = '0' then
+if rising_edge(clk) then
+if rst = '1' then 
+
+else
 	in_dat_buffer <= in_dat;
 
 	if column_temp = "1111110" and (row_temp = "00" or row_temp = "10") then
@@ -129,7 +132,7 @@ column <= column_temp;
 row <= row_temp;
 out_dat <= out_dat_temp;
 end if;
-
+end if;
 
 end process;
 FAOOF <= FAOOF_temp;

@@ -77,6 +77,8 @@ signal	in_val_int	: std_logic;
 signal	FAOOF_int	: std_logic;
 signal	row_int		: std_logic_vector(1 downto 0);
 signal	column_int	: std_logic_vector(6 downto 0);
+signal 	column_temp_int	: std_logic_vector(6 downto 0);
+signal 	row_temp_int	: std_logic_vector(1 downto 0);
 signal  bip_err_int	: std_logic;
 
 signal  out_dat_align  		: std_logic_vector(255 downto 0);
@@ -85,9 +87,8 @@ signal  out_dat_bip_8		: std_logic_vector(255 downto 0);
 signal  out_dat_demap		: std_logic_vector(255 downto 0);
 
 
+
 begin
-
-
 
 DUT_align    : frm_align	port map (clk,
 					  rst,
@@ -99,20 +100,20 @@ DUT_align    : frm_align	port map (clk,
 DUT_scramble : frm_scramble 	port map (clk,
 					  rst,
 					  out_dat_align,
-					  in_val_int,
+					  FAOOF_int,
 					  out_val_int,
 					  row_int,
 					  column_int,
 					  out_dat_scramble);
---DUT_BIP_8    : frm_bip_8 	port map (clk,
---					  rst,
---					  out_dat_scramble,
---					  in_val_int,
---					  out_val_int,
---					  bip_err_int,
---					  row_int,
---					  column_int,
---					  out_dat_bip_8);
+DUT_BIP_8    : frm_bip_8 	port map (clk,
+					  rst,
+					  out_dat_scramble,
+					  FAOOF_int,
+					  out_val_int,
+					  bip_err_int,
+					  row_int,
+					  column_int,
+					  out_dat_bip_8);
 --DUT_demap    : frm_demap	port map (clk,
 --					  rst,
 --					  out_dat_scramble, -- skal være bip_8
@@ -123,6 +124,5 @@ DUT_scramble : frm_scramble 	port map (clk,
 
 
 out_data <= out_dat_scramble; -- til analyzer, skal være sidste output i bussen
-
 
 end architecture;
