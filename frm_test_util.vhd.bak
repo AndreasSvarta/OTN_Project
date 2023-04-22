@@ -1,7 +1,8 @@
 library ieee;
 use ieee.std_logic_1164.all;
-use ieee.std_logic_arith.all;
+--use ieee.std_logic_arith.all;
 use ieee.std_logic_unsigned.all;
+use IEEE.NUMERIC_STD.all;
 use std.textio.all;
 
 Package frm_test_util is  
@@ -12,7 +13,7 @@ Package frm_test_util is
       row          :  integer range 4 downto 0;
       col          :  integer range 128 downto 0;
       data         :  std_logic_vector(255 downto 0);
-      fas_pos      :  integer 510;
+      fas_pos      :  integer range 511 downto 0; --:=511;
  
       FAS          :  std_logic_vector(47 downto 0);-- := x"f6f6f6282828";
       MFAS         :  std_logic_vector(7 downto 0);
@@ -126,12 +127,18 @@ procedure otn_scramble(
   
 
   
-procedure otn_bip8(
+procedure otn_bip8_report(
   pos              :  in      integer range 511 downto 0;
   bip8             :  inout   std_logic_vector(7 downto 0);
   mask             :  in      std_logic_vector(31 downto 0);
   data             :  in      std_logic_vector(511 downto 0));  
 
+
+procedure otn_bip8(
+  pos              :  in      integer range 511 downto 0;
+  bip8             :  inout   std_logic_vector(7 downto 0);
+  mask             :  in      std_logic_vector(31 downto 0);
+  data             :  in      std_logic_vector(511 downto 0));  
   
   
 procedure prbs31(
@@ -198,6 +205,28 @@ begin
 end;
 
 --bip8
+procedure otn_bip8_report(
+  pos              :  in      integer range 511 downto 0;
+  bip8             :  inout   std_logic_vector(7 downto 0);
+  mask             :  in      std_logic_vector(31 downto 0);
+  data             :  in      std_logic_vector(511 downto 0)) is
+
+variable txt : LINE;
+variable test : integer;
+begin
+  for i in 31 downto 0 loop
+    if mask(i) = '1' then
+      bip8 := bip8 xor data(pos+(i-31)*8 downto pos+(i-31)*8-8+1);
+--      report "test_util bip8: " & to_hstring(unsigned(bip8));
+--      report "test_util in_dat: " & to_hstring(unsigned(data(pos+(i-31)*8 downto pos+(i-31)*8-8+1)));
+    end if;
+  end loop;
+report "test_util_bip8_report result: " & to_hstring(unsigned(bip8));
+--write(txt, string'("test_util_bip8_report result: "));
+--write(txt, integer'(to_integer(unsigned(bip8))));
+--writeline(output,txt);
+end;
+
 procedure otn_bip8(
   pos              :  in      integer range 511 downto 0;
   bip8             :  inout   std_logic_vector(7 downto 0);
@@ -211,7 +240,6 @@ begin
       bip8 := bip8 xor data(pos+(i-31)*8 downto pos+(i-31)*8-8+1);
     end if;
   end loop;
-
 end;
 
 

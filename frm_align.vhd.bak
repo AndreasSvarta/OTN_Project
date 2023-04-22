@@ -13,8 +13,7 @@ port (
 	in_dat	: in std_logic_vector(255 downto 0);
 	FAOOF	: out std_logic;
 	row	: out std_logic_vector(1 downto 0);
-	column	: out std_logic_vector(6 downto 0);
-	out_dat	: out std_logic_vector(255 downto 0)
+	column	: out std_logic_vector(6 downto 0)
 	);
 end entity;
 
@@ -71,9 +70,7 @@ report "The value of 'index_check+8' is " & integer'image(index_check+8);
 			if (row_temp = "11" and column_temp = "1111111") then
 				if (index_check = i) then
 					long_faoof <= long_faoof + "1";
-					report "nue r vi her";
 				else
-					report "eler måske her";
 					long_faoof <= "01";
 				end if;
 				column_temp <= "0000000";
@@ -132,7 +129,7 @@ column <= column_temp;
 row <= row_temp;
 out_dat <= out_dat_temp;
 end if;
-
+end if;
 
 end process;
 FAOOF <= FAOOF_temp;

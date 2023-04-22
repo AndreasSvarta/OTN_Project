@@ -70,7 +70,7 @@ DUT	 : frm_framer port map(clk_TB,reset_TB,in_dat_dut_TB,in_val_TB,out_val_TB,ro
 	in_dat_dut_TB <= out_dat_gen_TB;
       test_conf_TB.conf 	    <= "00";            
       test_conf_TB.cbr_map     	    <='1';     
-      test_conf_TB.prbs             <='0'; --'1' pseudorandom
+      test_conf_TB.prbs             <='1'; --'1' pseudorandom
       test_conf_TB.clk_mode         <=0;
       test_conf_TB.disable_gen      <='0';
       test_conf_TB.disable_ana      <='0';
@@ -87,7 +87,7 @@ DUT	 : frm_framer port map(clk_TB,reset_TB,in_dat_dut_TB,in_val_TB,out_val_TB,ro
 --      otn_oh_TB.FAS          <=  x"f6f6f6282828";
       otn_oh_TB.MFAS         <=  (others => '0');
       otn_oh_TB.SM_TTI       <=  (others => '0');
-      otn_oh_TB.SM_BIP8      <=  (others => '0');
+--      otn_oh_TB.SM_BIP8      <=  (others => '0');
       otn_oh_TB.SM_AUX       <=  (others => '0');
       otn_oh_TB.GCC0         <=  (others => '0');
       otn_oh_TB.OTU3_RES     <=  (others => '0');
@@ -169,6 +169,7 @@ DUT	 : frm_framer port map(clk_TB,reset_TB,in_dat_dut_TB,in_val_TB,out_val_TB,ro
 	when 0 =>
 		otn_oh_TB.FAS <= x"F6F6F6282828";
 		otn_oh_TB.fas_pos <=  511;
+		otn_oh_TB.SM_BIP8 <= "00010100";
 	
 	when others =>
 		otn_oh_TB.FAS <= x"F6F6F6282828";

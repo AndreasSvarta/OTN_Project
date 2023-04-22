@@ -13,6 +13,8 @@ port (
 	out_val	: out std_logic;
 	row	: in std_logic_vector(1 downto 0);
 	column : in std_logic_vector(6 downto 0);
+	row_out	: out std_logic_vector(1 downto 0);
+	column_out : out std_logic_vector(6 downto 0);
 	out_dat	: out std_logic_vector(255 downto 0)
 	);
 end entity;
@@ -30,6 +32,8 @@ begin
 process (clk)
 begin
 if (rising_edge(clk)) then 
+row_out <= row;
+column_out <= column;
 if (column = "0000000" and row = "00") then
 
 out_dat_temp(255) <= in_dat(255);

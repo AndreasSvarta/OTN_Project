@@ -111,7 +111,7 @@ begin
                 bip8_2 := X"00";
                 bip8_1 := X"00";
                 bip8_0 := X"00";  
-                otn_bip8_report(fas_pos,bip8_0,X"0003ffff",in_data_512);
+                otn_bip8(fas_pos,bip8_0,X"0003ffff",in_data_512);
                 
                 in_data_256_s <= in_data_512(fas_pos downto fas_pos-256+1);
                 in_data_256 := in_data_512(fas_pos downto fas_pos-256+1);
@@ -196,13 +196,13 @@ begin
                 ais := '1';
                 oci := '1';
                 lck := '1';
-                otn_bip8_report(fas_pos,bip8_0,X"0003ffff",in_data_512);            
+                otn_bip8(fas_pos,bip8_0,X"0003ffff",in_data_512);            
                 --odu_ais(fas_pos,'1',X"0003ffff",in_data_512,ais,oci,lck);            
               elsif (otn_col < 120) then
-                otn_bip8_report(fas_pos,bip8_0,X"ffffffff",in_data_512);
+                otn_bip8(fas_pos,bip8_0,X"ffffffff",in_data_512);
                 odu_ais(fas_pos,'1',X"ffffffff",in_data_512,ais,oci,lck);            
               elsif (otn_col = 120) then
-                otn_bip8_report(fas_pos,bip8_0,X"ffff0000",in_data_512);
+                otn_bip8(fas_pos,bip8_0,X"ffff0000",in_data_512);
                 odu_ais(fas_pos,'1',X"ffff0000",in_data_512,ais,oci,lck);            
               end if;  
                          
@@ -302,13 +302,13 @@ begin
               
               
               if (otn_col = 1) then
-                otn_bip8_report(fas_pos,bip8_0,X"00000003",in_data_512);            
+                otn_bip8(fas_pos,bip8_0,X"00000003",in_data_512);            
                 --odu_ais(fas_pos,'1',X"00000003",in_data_512,ais,oci,lck);            
               elsif (otn_col < 120) then
-                otn_bip8_report(fas_pos,bip8_0,X"ffffffff",in_data_512);
+                otn_bip8(fas_pos,bip8_0,X"ffffffff",in_data_512);
                 odu_ais(fas_pos,'1',X"ffffffff",in_data_512,ais,oci,lck);            
               elsif (otn_col = 120) then
-                otn_bip8_report(fas_pos,bip8_0,X"ffffffff",in_data_512);
+                otn_bip8(fas_pos,bip8_0,X"ffffffff",in_data_512);
                 odu_ais(fas_pos,'1',X"ffffffff",in_data_512,ais,oci,lck);            
               end if;             
                 
@@ -408,13 +408,13 @@ begin
               end if;
   
               if (otn_col = 1) then
-                otn_bip8_report(fas_pos,bip8_0,X"0003ffff",in_data_512);            
+                otn_bip8(fas_pos,bip8_0,X"0003ffff",in_data_512);            
                 --odu_ais(fas_pos,'1',X"0003ffff",in_data_512,ais,oci,lck);            
               elsif (otn_col < 120) then
-                otn_bip8_report(fas_pos,bip8_0,X"ffffffff",in_data_512);
+                otn_bip8(fas_pos,bip8_0,X"ffffffff",in_data_512);
                 odu_ais(fas_pos,'1',X"ffffffff",in_data_512,ais,oci,lck);            
               elsif (otn_col = 120) then
-                otn_bip8_report(fas_pos,bip8_0,X"ffff0000",in_data_512);
+                otn_bip8(fas_pos,bip8_0,X"ffff0000",in_data_512);
                 odu_ais(fas_pos,'1',X"ffff0000",in_data_512,ais,oci,lck);            
               end if;             
 
@@ -488,13 +488,13 @@ begin
   
   
               if (otn_col = 1) then
-                otn_bip8_report(fas_pos,bip8_0,X"00000003",in_data_512);            
+                otn_bip8(fas_pos,bip8_0,X"00000003",in_data_512);            
                 --odu_ais(fas_pos,'1',X"00000003",in_data_512,ais,oci,lck);            
               elsif (otn_col < 120) then
-                otn_bip8_report(fas_pos,bip8_0,X"ffffffff",in_data_512);
+                otn_bip8(fas_pos,bip8_0,X"ffffffff",in_data_512);
                 odu_ais(fas_pos,'1',X"ffffffff",in_data_512,ais,oci,lck);            
               elsif (otn_col = 120) then
-                otn_bip8_report(fas_pos,bip8_0,X"ffffffff",in_data_512);
+                otn_bip8(fas_pos,bip8_0,X"ffffffff",in_data_512);
                 odu_ais(fas_pos,'1',X"ffffffff",in_data_512,ais,oci,lck);            
                 
                 otn_oh.odu3ais(0) <= ais;

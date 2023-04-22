@@ -71,9 +71,7 @@ report "The value of 'index_check+8' is " & integer'image(index_check+8);
 			if (row_temp = "11" and column_temp = "1111111") then
 				if (index_check = i) then
 					long_faoof <= long_faoof + "1";
-					report "nue r vi her";
 				else
-					report "eler måske her";
 					long_faoof <= "01";
 				end if;
 				column_temp <= "0000000";

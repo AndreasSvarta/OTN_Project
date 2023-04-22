@@ -41,6 +41,8 @@ port (
 	out_val	: out std_logic;
 	row	: in std_logic_vector(1 downto 0);
 	column	: in std_logic_vector(6 downto 0);
+	row_out	: out std_logic_vector(1 downto 0);
+	column_out : out std_logic_vector(6 downto 0);
 	out_dat	: out std_logic_vector(255 downto 0)
 	);
 end component;
@@ -54,8 +56,9 @@ port (
 	out_val	: out std_logic;
 	bip_err : out std_logic;
 	row	: in std_logic_vector(1 downto 0);
-	column	: in std_logic_vector(6 downto 0);
-	out_dat	: out std_logic_vector(255 downto 0)
+	column	: in std_logic_vector(6 downto 0)
+--	row_out	: out std_logic_vector(1 downto 0);
+--	column_out : out std_logic_vector(6 downto 0)
 	);
 end component;
 
@@ -83,10 +86,12 @@ signal  bip_err_int	: std_logic;
 
 signal  out_dat_align  		: std_logic_vector(255 downto 0);
 signal	out_dat_scramble	: std_logic_vector(255 downto 0);
-signal  out_dat_bip_8		: std_logic_vector(255 downto 0);
+--signal  out_dat_bip_8		: std_logic_vector(255 downto 0);
 signal  out_dat_demap		: std_logic_vector(255 downto 0);
-
-
+signal	row_out_scramble	: std_logic_vector(1 downto 0);
+signal 	column_out_scramble	: std_logic_vector(6 downto 0);
+--signal 	row_out_bip_8		: std_logic_vector(1 downto 0);
+--signal 	column_out_bip_8	: std_logic_vector(6 downto 0);
 
 begin
 
@@ -104,6 +109,8 @@ DUT_scramble : frm_scramble 	port map (clk,
 					  out_val_int,
 					  row_int,
 					  column_int,
+					  row_out_scramble,
+					  column_out_scramble,
 					  out_dat_scramble);
 DUT_BIP_8    : frm_bip_8 	port map (clk,
 					  rst,
@@ -111,9 +118,10 @@ DUT_BIP_8    : frm_bip_8 	port map (clk,
 					  FAOOF_int,
 					  out_val_int,
 					  bip_err_int,
-					  row_int,
-					  column_int,
-					  out_dat_bip_8);
+					  row_out_scramble,
+					  column_out_scramble);
+					  --row_out_bip_8,
+					  --column_out_bip_8);
 --DUT_demap    : frm_demap	port map (clk,
 --					  rst,
 --					  out_dat_scramble, -- skal være bip_8
