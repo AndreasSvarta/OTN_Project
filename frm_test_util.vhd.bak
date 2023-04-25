@@ -221,7 +221,7 @@ begin
 --      report "test_util in_dat: " & to_hstring(unsigned(data(pos+(i-31)*8 downto pos+(i-31)*8-8+1)));
     end if;
   end loop;
-report "test_util_bip8_report result: " & to_hstring(unsigned(bip8));
+--report "test_util_bip8_report result: " & to_hstring(unsigned(bip8));
 --write(txt, string'("test_util_bip8_report result: "));
 --write(txt, integer'(to_integer(unsigned(bip8))));
 --writeline(output,txt);
