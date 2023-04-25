@@ -24,8 +24,8 @@ architecture frm_align_arch of frm_align is
 signal in_dat_buffer 	: std_logic_vector(255 downto 0);
 signal column_temp 	: std_logic_vector(6 downto 0):="1111101";
 signal row_temp		: std_logic_vector(1 downto 0):="11";
-signal long_fas 	: std_logic_vector(31 downto 0):=x"F6F62828";
-signal short_fas 	: std_logic_vector(23 downto 0):=x"F62828";
+signal FAS_find 	: std_logic_vector(31 downto 0):=x"F6F62828";
+signal FAS_lose 	: std_logic_vector(23 downto 0):=x"F62828";
 signal long_faoof	: std_logic_vector(1 downto 0):="00";
 signal short_faoof	: std_logic :='0';
 signal short_error_cnt	: std_logic_vector(2 downto 0):="000";
@@ -63,8 +63,8 @@ else
 	if FAOOF_temp = '1' then
 --	for i in 0 to 255-31 loop
 	for i in 0 to 255 loop
-		if in_dat_512(511-i-8 downto 511-31-8-i) = long_fas then --hvis lang FAS fundet
---		if in_dat(255-i downto 255-31-i) = long_fas then --hvis lang FAS fundet
+		if in_dat_512(511-i-8 downto 511-31-8-i) = FAS_find then --hvis lang FAS fundet
+--		if in_dat(255-i downto 255-31-i) = FAS_find then --hvis lang FAS fundet
 report "The value of 'i' is " & integer'image(i);
 report "The value of 'index_check' is " & integer'image(index_check);
 report "The value of 'index_check+8' is " & integer'image(index_check+8);
@@ -101,7 +101,7 @@ end if;
 	
 if FAOOF_temp = '0' then
   if (row_temp = "11" and column_temp = "1111111")then
-    if in_dat_512(511-16-to_integer(unsigned(index)) downto 511-23-16-to_integer(unsigned(index))) = short_fas then
+    if in_dat_512(511-16-to_integer(unsigned(index)) downto 511-23-16-to_integer(unsigned(index))) = FAS_lose then
 	report "Short fas at correct index found";
 	short_error_cnt <= "000";
     else
