@@ -146,7 +146,7 @@ if rising_edge(clk) then
 
 		elsif row = "01" or row = "11" then
 			if column = "0000000" then
-			for i in 31 downto 11 loop -- lidt usikker på om det skal være til 17, men i hvert fald ikke til 0
+			for i in 31 downto 11 loop -- lidt usikker på om det skal være til 17, men i hvert fald ikke til 0. virker ned til 11
 			bip_err_temp(0) := bip_err_temp(0) xor in_dat_temp(8*i);
 			bip_err_temp(1) := bip_err_temp(1) xor in_dat_temp(8*i+1);
 			bip_err_temp(2) := bip_err_temp(2) xor in_dat_temp(8*i+2);

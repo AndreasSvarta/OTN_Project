@@ -84,8 +84,8 @@ if rising_edge(clk) then
 		if column = "0000000" then
 			for i in 17 downto 0 loop -- skip ODU3 overhead
 			test := in_dat_temp(8*i+7 downto 8*i);
---			report "HDR The value of 'i' and 'bip_err_temp' is " & integer'image(i) & " - " & to_hstring(bip_err_temp);		
---			report "HDR The value of 'in_dat_temp(i*8...)' is " & " - " & to_hstring(test);		
+--			----report "HDR The value of 'i' and 'bip_err_temp' is " & integer'image(i) & " - " & to_hstring(bip_err_temp);		
+--			----report "HDR The value of 'in_dat_temp(i*8...)' is " & " - " & to_hstring(test);		
 			bip_err_temp(0) := bip_err_temp(0) xor in_dat_temp(8*i);
 			bip_err_temp(1) := bip_err_temp(1) xor in_dat_temp(8*i+1);
 			bip_err_temp(2) := bip_err_temp(2) xor in_dat_temp(8*i+2);
@@ -94,14 +94,14 @@ if rising_edge(clk) then
 			bip_err_temp(5) := bip_err_temp(5) xor in_dat_temp(8*i+5);
 			bip_err_temp(6) := bip_err_temp(6) xor in_dat_temp(8*i+6);
 			bip_err_temp(7) := bip_err_temp(7) xor in_dat_temp(8*i+7);
---			report "The value of 'i' and 'bip_err_temp' is " & integer'image(i) & " - " & to_hstring(bip_err_temp);		
+--			----report "The value of 'i' and 'bip_err_temp' is " & integer'image(i) & " - " & to_hstring(bip_err_temp);		
 			end loop;
-			report "HEADER START - The value of 'bip_err_temp' is " & to_hstring(bip_err_temp);		
+			----report "HEADER START - The value of 'bip_err_temp' is " & to_hstring(bip_err_temp);		
 		elsif column = "1110111" then
 			for i in 31 downto 16 loop
 			test := in_dat_temp(8*i+7 downto 8*i);
---			report "FEC The value of 'i' and 'bip_err_temp' is " & integer'image(i) & " - " & to_hstring(bip_err_temp);		
---			report "FEC The value of 'in_dat_temp(i*8...)' is " & " - " & to_hstring(test);		
+--			----report "FEC The value of 'i' and 'bip_err_temp' is " & integer'image(i) & " - " & to_hstring(bip_err_temp);		
+--			----report "FEC The value of 'in_dat_temp(i*8...)' is " & " - " & to_hstring(test);		
 			bip_err_temp(0) := bip_err_temp(0) xor in_dat_temp(8*i);
 			bip_err_temp(1) := bip_err_temp(1) xor in_dat_temp(8*i+1);
 			bip_err_temp(2) := bip_err_temp(2) xor in_dat_temp(8*i+2);
@@ -111,10 +111,10 @@ if rising_edge(clk) then
 			bip_err_temp(6) := bip_err_temp(6) xor in_dat_temp(8*i+6);
 			bip_err_temp(7) := bip_err_temp(7) xor in_dat_temp(8*i+7);		
 			end loop;
-			report "FEC START - The value of 'bip_err_temp' is " & to_hstring(bip_err_temp);	
+			----report "FEC START - The value of 'bip_err_temp' is " & to_hstring(bip_err_temp);	
 		elsif column > "1110111" then
 			-- skip FEC
-			report "FEC SKIP - The value of 'bip_err_temp' is " & to_hstring(bip_err_temp);	
+			----report "FEC SKIP - The value of 'bip_err_temp' is " & to_hstring(bip_err_temp);	
 		elsif column = "1111111" then
 			for i in 1 downto 0 loop
 			bip_err_temp(0) := bip_err_temp(0) xor in_dat_temp(8*i);
@@ -126,12 +126,12 @@ if rising_edge(clk) then
 			bip_err_temp(6) := bip_err_temp(6) xor in_dat_temp(8*i+6);
 			bip_err_temp(7) := bip_err_temp(7) xor in_dat_temp(8*i+7);		
 			end loop;
-			report "COLUMN 127 last 2 byte 'bip_err_temp' is " & to_hstring(bip_err_temp);	
+			----report "COLUMN 127 last 2 byte 'bip_err_temp' is " & to_hstring(bip_err_temp);	
 		else
 			for i in 31 downto 0 loop -- for data
 			test := in_dat_temp(8*i+7 downto 8*i);
---			report "DATA The value of 'i' and 'bip_err_temp' is " & integer'image(i) & " - " & to_hstring(bip_err_temp);		
---			report "DATA The value of 'in_dat_temp(i*8...)' is " & " - " & to_hstring(test);		
+--			----report "DATA The value of 'i' and 'bip_err_temp' is " & integer'image(i) & " - " & to_hstring(bip_err_temp);		
+--			----report "DATA The value of 'in_dat_temp(i*8...)' is " & " - " & to_hstring(test);		
 			bip_err_temp(0) := bip_err_temp(0) xor in_dat_temp(8*i);
 			bip_err_temp(1) := bip_err_temp(1) xor in_dat_temp(8*i+1);
 			bip_err_temp(2) := bip_err_temp(2) xor in_dat_temp(8*i+2);
@@ -141,12 +141,12 @@ if rising_edge(clk) then
 			bip_err_temp(6) := bip_err_temp(6) xor in_dat_temp(8*i+6);
 			bip_err_temp(7) := bip_err_temp(7) xor in_dat_temp(8*i+7);
 			end loop;
-			report "DATA - The value of 'bip_err_temp' is " & to_hstring(bip_err_temp);	
+			----report "DATA - The value of 'bip_err_temp' is " & to_hstring(bip_err_temp);	
 		end if;
 
 		elsif row = "01" or row = "11" then
 			if column = "0000000" then
-			for i in 31 downto 11 loop -- lidt usikker på om det skal være til 17, men i hvert fald ikke til 0. virker ned til 11
+			for i in 31 downto 11 loop -- lidt usikker pï¿½ om det skal vï¿½re til 17, men i hvert fald ikke til 0. virker ned til 11
 			bip_err_temp(0) := bip_err_temp(0) xor in_dat_temp(8*i);
 			bip_err_temp(1) := bip_err_temp(1) xor in_dat_temp(8*i+1);
 			bip_err_temp(2) := bip_err_temp(2) xor in_dat_temp(8*i+2);
@@ -155,13 +155,13 @@ if rising_edge(clk) then
 			bip_err_temp(5) := bip_err_temp(5) xor in_dat_temp(8*i+5);
 			bip_err_temp(6) := bip_err_temp(6) xor in_dat_temp(8*i+6);
 			bip_err_temp(7) := bip_err_temp(7) xor in_dat_temp(8*i+7);			
-			report "TEST 01|11 of 'i' and 'bip_err_temp' is " & integer'image(i) & " - " & to_hstring(bip_err_temp);		
+			----report "TEST 01|11 of 'i' and 'bip_err_temp' is " & integer'image(i) & " - " & to_hstring(bip_err_temp);		
 			end loop;
 			elsif column = "1110110" then
 			for i in 31 downto 0 loop -- skip ODU3 overhead
 			test := in_dat_temp(8*i+7 downto 8*i);
---			report "FEC 01|11 The value of 'i' and 'bip_err_temp' is " & integer'image(i) & " - " & to_hstring(bip_err_temp);		
---			report "FEC 01|11 The value of 'in_dat_temp(i*8...)' is " & " - " & to_hstring(test);		
+--			----report "FEC 01|11 The value of 'i' and 'bip_err_temp' is " & integer'image(i) & " - " & to_hstring(bip_err_temp);		
+--			----report "FEC 01|11 The value of 'in_dat_temp(i*8...)' is " & " - " & to_hstring(test);		
 			bip_err_temp(0) := bip_err_temp(0) xor in_dat_temp(8*i);
 			bip_err_temp(1) := bip_err_temp(1) xor in_dat_temp(8*i+1);
 			bip_err_temp(2) := bip_err_temp(2) xor in_dat_temp(8*i+2);
@@ -170,15 +170,15 @@ if rising_edge(clk) then
 			bip_err_temp(5) := bip_err_temp(5) xor in_dat_temp(8*i+5);
 			bip_err_temp(6) := bip_err_temp(6) xor in_dat_temp(8*i+6);
 			bip_err_temp(7) := bip_err_temp(7) xor in_dat_temp(8*i+7);
-			report "The value of 'i' and 'bip_err_temp' is " & integer'image(i) & " - " & to_hstring(bip_err_temp);		
+			----report "The value of 'i' and 'bip_err_temp' is " & integer'image(i) & " - " & to_hstring(bip_err_temp);		
 			end loop;
-			report "HEADER START - The value of 'bip_err_temp' is " & to_hstring(bip_err_temp);		
+			----report "HEADER START - The value of 'bip_err_temp' is " & to_hstring(bip_err_temp);		
 			elsif column > "1110111" then
-			report "SKIP FEC 01|11";
+			----report "SKIP FEC 01|11";
 			else
 			for i in 31 downto 0 loop
---			report "DATA 01|11 The value of 'i' and 'bip_err_temp' is " & integer'image(i) & " - " & to_hstring(bip_err_temp);		
---			report "DATA 01|11 The value of 'in_dat_temp(i*8...)' is " & " - " & to_hstring(test);		
+--			----report "DATA 01|11 The value of 'i' and 'bip_err_temp' is " & integer'image(i) & " - " & to_hstring(bip_err_temp);		
+--			----report "DATA 01|11 The value of 'in_dat_temp(i*8...)' is " & " - " & to_hstring(test);		
 			bip_err_temp(0) := bip_err_temp(0) xor in_dat_temp(8*i);
 			bip_err_temp(1) := bip_err_temp(1) xor in_dat_temp(8*i+1);
 			bip_err_temp(2) := bip_err_temp(2) xor in_dat_temp(8*i+2);
@@ -188,11 +188,11 @@ if rising_edge(clk) then
 			bip_err_temp(6) := bip_err_temp(6) xor in_dat_temp(8*i+6);
 			bip_err_temp(7) := bip_err_temp(7) xor in_dat_temp(8*i+7);
 			end loop;
-			report "DATA 01|11 - The value of 'bip_err_temp' is " & to_hstring(bip_err_temp);	
+			----report "DATA 01|11 - The value of 'bip_err_temp' is " & to_hstring(bip_err_temp);	
 			end if;
 		end if;
 		bip_err_temp_sig <= bip_err_temp;
-     		report "frm_bip8: " & to_hstring(unsigned(bip_err_temp));
+     		----report "frm_bip8: " & to_hstring(unsigned(bip_err_temp));
 	end if;
 
 end if;

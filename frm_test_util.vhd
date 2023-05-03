@@ -217,12 +217,12 @@ begin
   for i in 31 downto 0 loop
     if mask(i) = '1' then
       bip8 := bip8 xor data(pos+(i-31)*8 downto pos+(i-31)*8-8+1);
---      report "test_util bip8: " & to_hstring(unsigned(bip8));
---      report "test_util in_dat: " & to_hstring(unsigned(data(pos+(i-31)*8 downto pos+(i-31)*8-8+1)));
+--      ------report "test_util bip8: " & to_hstring(unsigned(bip8));
+--      ------report "test_util in_dat: " & to_hstring(unsigned(data(pos+(i-31)*8 downto pos+(i-31)*8-8+1)));
     end if;
   end loop;
-report "test_util_bip8_report result: " & to_hstring(unsigned(bip8));
---write(txt, string'("test_util_bip8_report result: "));
+------report "test_util_bip8_------report result: " & to_hstring(unsigned(bip8));
+--write(txt, string'("test_util_bip8_------report result: "));
 --write(txt, integer'(to_integer(unsigned(bip8))));
 --writeline(output,txt);
 end;
