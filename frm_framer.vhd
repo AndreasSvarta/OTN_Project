@@ -68,6 +68,7 @@ port (
 	rst	: in std_logic;
 	in_dat	: in std_logic_vector(255 downto 0);
 	in_val	: in std_logic;
+	out_val	: out std_logic;
 	row	: in std_logic_vector(1 downto 0);
 	column	: in std_logic_vector(6 downto 0);
 	out_dat	: out std_logic_vector(255 downto 0)
@@ -122,15 +123,16 @@ DUT_BIP_8    : frm_bip_8 	port map (clk,
 					  column_out_scramble);
 					  --row_out_bip_8,
 					  --column_out_bip_8);
---DUT_demap    : frm_demap	port map (clk,
---					  rst,
---					  out_dat_scramble, -- skal være bip_8
---					  in_val_int,
---					  row_int,
---					  column_int,
---					  out_dat_demap);
+DUT_demap    : frm_demap	port map (clk,
+					  rst,
+					  out_dat_scramble,
+					  in_val_int,
+					  out_val_int,
+					  row_int,
+					  column_int,
+					  out_dat_demap);
 
 
-out_data <= out_dat_scramble; -- til analyzer, skal være sidste output i bussen
+out_data <= out_dat_demap; -- til analyzer, skal være sidste output i bussen
 
 end architecture;
