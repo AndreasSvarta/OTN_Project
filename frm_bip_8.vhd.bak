@@ -12,13 +12,10 @@ port (
 	rst	: in std_logic;
 	in_dat	: in std_logic_vector(255 downto 0);
 	in_val	: in std_logic;
-	out_val	: out std_logic;
+	--out_val	: out std_logic;
 	bip_err : out std_logic;
 	row	: in std_logic_vector(1 downto 0);
 	column	: in std_logic_vector(6 downto 0)
---	row_out	: out std_logic_vector(1 downto 0);
---	column_out : out std_logic_vector(6 downto 0);
---	out_dat	: out std_logic_vector(255 downto 0)
 	);
 end entity;
 
@@ -26,12 +23,12 @@ end entity;
 architecture frm_bip_8_arch of frm_bip_8 is
 
 signal bip_err_temp_sig	: std_logic_vector(7 downto 0);
-signal bip_err_temp_0 	: std_logic:='0';
+--signal bip_err_temp_0 	: std_logic:='0';
 signal in_dat_temp 	: std_logic_vector(255 downto 0);
 
 type   	array_mux is array (0 to 3) of std_logic_vector(7 downto 0);
 signal 	bip_err_array  		: array_mux := (others=>(others=>'0'));
-signal 	observed_SM_BIP_8 	: array_mux := (others=>(others=>'0'));
+--signal 	observed_SM_BIP_8 	: array_mux := (others=>(others=>'0'));
 signal  observed_SM_BIP_8_sig	: std_logic_vector(7 downto 0);
 signal 	fejl_BIP_8		: std_logic_vector(7 downto 0):="00000000";
 signal 	frame_cnt		: std_logic_vector(1 downto 0):="00";
@@ -55,8 +52,8 @@ if rising_edge(clk) then
 	if rst = '1' then 
 		bip_err <= '0';
 		bip_err_temp := "00000000";
-		out_val <= '0';
-	elsif in_dat /= "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU" then
+		--out_val <= '0';
+	elsif in_val = '0' and in_dat /= "UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU" then
 		if row = "00" and column = "0000000" then
 			observed_SM_BIP_8_sig <= in_dat_temp(191 downto 184);
 		end if;
@@ -146,7 +143,7 @@ if rising_edge(clk) then
 
 		elsif row = "01" or row = "11" then
 			if column = "0000000" then
-			for i in 31 downto 11 loop -- lidt usikker pï¿½ om det skal vï¿½re til 17, men i hvert fald ikke til 0. virker ned til 11
+			for i in 31 downto 11 loop -- lidt usikker på om det skal være til 17, men i hvert fald ikke til 0. virker ned til 11
 			bip_err_temp(0) := bip_err_temp(0) xor in_dat_temp(8*i);
 			bip_err_temp(1) := bip_err_temp(1) xor in_dat_temp(8*i+1);
 			bip_err_temp(2) := bip_err_temp(2) xor in_dat_temp(8*i+2);

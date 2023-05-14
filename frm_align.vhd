@@ -32,7 +32,7 @@ signal short_error_cnt	: std_logic_vector(2 downto 0):="000";
 signal FAOOF_temp 	: std_logic:='1';
 signal index		: std_logic_vector(7 downto 0):="00000000";
 --signal index_faoof_0	: std_logic_vector(7 downto 0):="00000000";
-signal index_check	: integer range -80 to 300 :=0;
+signal index_check	: integer range 0 to 257 :=0;
 signal in_dat_512	: std_logic_vector(511 downto 0);
 signal out_dat_temp	: std_logic_vector(255 downto 0);
 
@@ -64,11 +64,11 @@ else
 		long_faoof <= long_faoof + "1";
 		column_temp <= "0000000";
 		row_temp <= "00";
-		index <= "00000000";
-		report "exit loop hvis FAS er fundet på korrekt index";
+		--index <= "00000000";
+		report "exit loop hvis FAS er fundet pï¿½ korrekt index";
 	else
 		loop1 : for i in 0 to 255 loop
-		if in_dat_512(511-i-8 downto 511-31-8-i) = FAS_find then --hvis lang FAS fundet, men på nyt index
+		if in_dat_512(511-i-8 downto 511-31-8-i) = FAS_find then --hvis lang FAS fundet, men pï¿½ nyt index
 --		report "The value of 'i' is " & integer'image(i);
 --		report "The value of 'index_check' is " & integer'image(index_check);
 --		report "The value of 'index_check+8' is " & integer'image(index_check+8);
@@ -80,7 +80,8 @@ else
 --			report "The value of 'a' is " & integer'image(to_integer(unsigned(index)));
 		end if;
 	
-		if long_faoof = "01" and column_temp = "1111111" and row_temp = "11" then
+		--if long_faoof = "01" and column_temp = "1111111" and row_temp = "11" then
+		if column_temp = "1111111" and row_temp = "11" then
 			long_faoof <= "00";
 		end if;
 		end loop;
@@ -103,6 +104,7 @@ if FAOOF_temp = '0' then
 	short_error_cnt <= short_error_cnt + "1";
 	if short_error_cnt = "100" then
 	  FAOOF_temp <= '1';
+	  short_error_cnt <= "000";		
 	end if;
     end if;
   end if;
@@ -111,7 +113,8 @@ end if;
 	
 
 --for i in 0 to 255 loop
---  if i = index then--    out_dat <= in_dat_buffer(255-i downto 0) & in_dat(255 downto 255-i+1);
+--  if i = index then
+--    out_dat <= in_dat_buffer(255-i downto 0) & in_dat(255 downto 255-i+1);
 --  end if;
 --end loop;
 --	if index = 0 then

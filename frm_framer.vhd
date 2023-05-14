@@ -53,7 +53,7 @@ port (
 	rst	: in std_logic;
 	in_dat	: in std_logic_vector(255 downto 0);
 	in_val	: in std_logic;
-	out_val	: out std_logic;
+	--out_val	: out std_logic;
 	bip_err : out std_logic;
 	row	: in std_logic_vector(1 downto 0);
 	column	: in std_logic_vector(6 downto 0)
@@ -117,7 +117,7 @@ DUT_BIP_8    : frm_bip_8 	port map (clk,
 					  rst,
 					  out_dat_scramble,
 					  FAOOF_int,
-					  out_val_int,
+					  --out_val_int,
 					  bip_err_int,
 					  row_out_scramble,
 					  column_out_scramble);
