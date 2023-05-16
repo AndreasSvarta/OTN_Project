@@ -9,6 +9,7 @@ port (
 	clk	: in std_logic;
 	rst	: in std_logic;
 	in_dat	: in std_logic_vector(255 downto 0);
+	in_val	: in std_logic;
 	out_val	: out std_logic;
 	row	: in std_logic_vector(1 downto 0);
 	column	: in std_logic_vector(6 downto 0);

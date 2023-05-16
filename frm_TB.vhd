@@ -167,7 +167,7 @@ DUT	 : frm_framer port map(clk_TB,reset_TB,in_dat_dut_TB,in_val_TB,out_val_TB,ro
 	begin
 	case to_integer(unsigned(stat_TB.frm_nr)) is
 when 0 =>
-otn_oh_TB.fas_pos <= 511;
+otn_oh_TB.fas_pos <= 257;
 when 1 to 7 =>
 otn_oh_TB.fas_pos <= 256;
 when 8 to 14 =>
@@ -183,7 +183,7 @@ otn_oh_TB.fas_pos <= 256;
 		otn_oh_TB.fas_pos <=  511;
 	end case;
 		otn_oh_TB.FAS <= x"F6F6F6282828"; --for at ignorere case
-		otn_oh_TB.fas_pos <=  511;	  --for at ignorere case
+--		otn_oh_TB.fas_pos <=  511;	  --for at ignorere case
 		otn_oh_TB.SM_BIP8 <= "00000000";
 
     end process;
